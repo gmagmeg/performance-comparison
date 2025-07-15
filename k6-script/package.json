@@ -1,0 +1,24 @@
+{
+  "name": "php-performance-test",
+  "version": "1.0.0",
+  "description": "PHP実行環境性能比較テスト用k6スクリプト",
+  "scripts": {
+    "test:apache": "k6 run --env TARGET_ENV=apache light-load-test.ts",
+    "test:nginx": "k6 run --env TARGET_ENV=nginx light-load-test.ts",
+    "test:swoole": "k6 run --env TARGET_ENV=swoole light-load-test.ts",
+    "test:frankenphp": "k6 run --env TARGET_ENV=frankenphp light-load-test.ts",
+    "test:all": "npm run test:apache && npm run test:nginx && npm run test:swoole && npm run test:frankenphp"
+  },
+  "devDependencies": {
+    "@types/k6": "^0.52.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "k6",
+    "load-testing",
+    "php",
+    "performance"
+  ],
+  "author": "",
+  "license": "MIT"
+}

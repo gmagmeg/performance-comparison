@@ -1,0 +1,55 @@
+services:
+  php:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: php
+    ports:
+      - "9100:80"
+    volumes:
+      - ./:/var/www/html
+    restart: always
+    depends_on:
+      - mysql
+    networks:
+      - new-apache_network
+    environment:
+      - OTEL_SERVICE_NAME=apache-php-app
+      - OTEL_SERVICE_VERSION=1.0.0
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4318
+      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+      - OTEL_TRACES_SAMPLER=always_on
+      - OTEL_PHP_DISABLED_INSTRUMENTATIONS=all
+  
+  jaeger:
+    image: jaegertracing/jaeger:2.7.0
+    ports:
+      - "16687:16686"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    networks:
+      - new-apache_network
+
+  mysql:
+    image: mysql:8.0
+    container_name: apache_mysql
+    restart: unless-stopped
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - new-apache_network
+
+networks:
+  new-apache_network:
+    driver: bridge
+
+volumes:
+  mysql_data:

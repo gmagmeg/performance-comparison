@@ -1,0 +1,20 @@
+{
+  "title": "k6 パフォーマンステスト",
+  "content": "パフォーマンステスト用のコンテンツが入ります。",
+  "status": "published",
+  "tags": [
+    "performance",
+    "k6",
+    "laravel",
+    "api-testing"
+  ],
+  "categories": [
+    1,
+    5,
+    12
+  ],
+  "metadata": {
+    "author": "author",
+    "license": "Apache-2.0"
+  }
+}

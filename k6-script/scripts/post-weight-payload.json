@@ -1,0 +1,19 @@
+{
+  "title": "PostWeighController Performance Test Article",
+  "content": "これは PostWeighController の負荷テスト用記事です。このコンテンツは最小文字数制限（50文字）を満たすように作成されており、負荷テスト中にデータベースに保存される投稿データのサンプルとして使用されます。テスト中には、この投稿に関連するカテゴリ、タグ、コメント、ビューも自動的に生成されます。",
+  "user_id": 1001,
+  "status": "published",
+  "tags": [
+    "performance-test",
+    "k6-load-test",
+    "frankenphp",
+    "laravel-api",
+    "database-heavy"
+  ],
+  "categories": [
+    10,
+    20,
+    30
+  ],
+  "published_at": "2026-06-27"
+}

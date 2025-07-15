@@ -1,0 +1,32 @@
+{
+	frankenphp {
+		{$FRANKENPHP_CONFIG}
+
+		worker {
+			file /app/public/frankenphp-worker.php
+		}
+	}
+	# frankenphp {
+	# 	num_threads 4
+	# 	worker {
+	# 		file /app/public/frankenphp-worker.php
+	# 		num 2
+	# 	}
+	# }
+}
+
+# HTTP
+:80 {
+	root public/
+
+	# PHP サーバー設定
+	php_server  {
+    file_server off
+		resolve_root_symlink false
+		worker {
+			num_workers 2
+			max_request 500
+		}
+	}
+	
+}

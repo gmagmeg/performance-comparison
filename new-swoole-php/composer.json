@@ -1,0 +1,5 @@
+{
+    "require": {
+        "laravel/octane": "^2.9"
+    }
+}

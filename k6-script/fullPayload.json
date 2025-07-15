@@ -1,0 +1,22 @@
+{
+  "title": "k6 Performance Test: A Comprehensive Title Example",
+  "content": "This content is specifically crafted for performance testing. It needs to be sufficiently long to meet the minimum length validation requirement of fifty characters, so we add some extra text here to make sure it passes smoothly.",
+  "user_id": 101,
+  "status": "published",
+  "tags": [
+    "performance",
+    "k6",
+    "laravel",
+    "api-testing"
+  ],
+  "categories": [
+    1,
+    5,
+    12
+  ],
+  "published_at": "2025-06-28",
+  "metadata": {
+    "author": "John Doe",
+    "license": "Apache-2.0"
+  }
+}

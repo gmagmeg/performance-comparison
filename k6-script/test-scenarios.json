@@ -1,0 +1,194 @@
+{
+  "post-load": {
+    "endpoint": "/api/post-weight",
+    "sleep_duration": 1,
+    "lightweight": {
+      "stages": [
+        {
+          "duration": "5s",
+          "target": 0
+        },
+        {
+          "duration": "10s",
+          "target": 10
+        },
+        {
+          "duration": "30s",
+          "target": 30
+        },
+        {
+          "duration": "5s",
+          "target": 0
+        }
+      ],
+      "thresholds": {
+        "http_req_duration": [
+          "p(95)<800"
+        ],
+        "http_req_failed": [
+          "rate<0.05"
+        ]
+      },
+      "tags": {
+        "test_type": "lightweight_post_load_test"
+      }
+    },
+    "medium": {
+      "stages": [
+        {
+          "duration": "1m",
+          "target": 25
+        },
+        {
+          "duration": "1m",
+          "target": 50
+        },
+        {
+          "duration": "6m",
+          "target": 80
+        },
+        {
+          "duration": "1m",
+          "target": 50
+        },
+        {
+          "duration": "1m",
+          "target": 0
+        }
+      ],
+      "thresholds": {
+        "http_req_duration": [
+          "p(95)<1200"
+        ],
+        "http_req_failed": [
+          "rate<0.05"
+        ]
+      },
+      "tags": {
+        "test_type": "lightweight_post_load_test"
+      }
+    },
+    "heavy": {
+      "stages": [
+        {
+          "duration": "2m",
+          "target": 200
+        },
+        {
+          "duration": "11m",
+          "target": 500
+        },
+        {
+          "duration": "2m",
+          "target": 0
+        }
+      ],
+      "thresholds": {
+        "http_req_duration": [
+          "p(95)<2500"
+        ],
+        "http_req_failed": [
+          "rate<0.15"
+        ]
+      },
+      "tags": {
+        "test_type": "heavy_post_load_test"
+      }
+    }
+  },
+  "post-weigh": {
+    "lightweight": {
+      "vus": 3,
+      "duration": "1m",
+      "tags": {
+        "test_type": "lightweight"
+      },
+      "thresholds": {
+        "http_req_duration": [
+          "p(95)<1000"
+        ],
+        "http_req_failed": [
+          "rate<0.05"
+        ]
+      }
+    },
+    "medium": {
+      "vus": 10,
+      "duration": "3m",
+      "tags": {
+        "test_type": "medium"
+      },
+      "thresholds": {
+        "http_req_duration": [
+          "p(95)<2000"
+        ],
+        "http_req_failed": [
+          "rate<0.1"
+        ]
+      }
+    },
+    "heavy": {
+      "vus": 20,
+      "duration": "5m",
+      "tags": {
+        "test_type": "heavy"
+      },
+      "thresholds": {
+        "http_req_duration": [
+          "p(95)<3000"
+        ],
+        "http_req_failed": [
+          "rate<0.15"
+        ]
+      }
+    }
+  },
+  "csv-upload": {
+    "lightweight": {
+      "vus": 5,
+      "duration": "2m",
+      "tags": {
+        "test_type": "csv_upload_lightweight"
+      },
+      "thresholds": {
+        "http_req_duration": [
+          "p(95)<5000"
+        ],
+        "http_req_failed": [
+          "rate<0.05"
+        ]
+      }
+    },
+    "medium": {
+      "vus": 15,
+      "duration": "5m",
+      "tags": {
+        "test_type": "csv_upload_medium"
+      },
+      "thresholds": {
+        "http_req_duration": [
+          "p(95)<8000"
+        ],
+        "http_req_failed": [
+          "rate<0.1"
+        ]
+      }
+    },
+    "heavy": {
+      "vus": 30,
+      "duration": "10m",
+      "tags": {
+        "test_type": "csv_upload_heavy"
+      },
+      "thresholds": {
+        "http_req_duration": [
+          "p(95)<12000"
+        ],
+        "http_req_failed": [
+          "rate<0.15"
+        ]
+      }
+    },
+    "endpoint": "/api/csv-upload"
+  }
+}
