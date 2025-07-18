@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>横線描画デモ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 0 10px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        button.clear-btn {
+            background-color: gray;
+        }
+        
+        button.clear-btn:hover {
+            background-color: #d32f2f;
+        }
+        
+        .lines-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .line-wrapper {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        
+        .line-label {
+            font-size: 28px;
+            color: #333;
+            width: 120px;
+            text-align: right;
+        }
+        
+        .line-container {
+            flex: 1;
+            height: 70px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .line {
+            height: 100%;
+            width: 0;
+            transition: none;
+            border-radius: 5px;
+        }
+        
+        .line1 { background-color: #FF6B6B; }
+        .line2 { background-color: #4ECDC4; }
+        .line3 { background-color: #45B7D1; }
+        .line4 { background-color: #96CEB4; }
+
+        h1 {
+            display: inline;;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Apache・FrankenPHP<br>P95レスポンスグラフ</h1>
+        <button onclick="drawLines()">横線を描画</button>
+        <button class="clear-btn" onclick="clearLines()">クリア</button>
+        
+        <div class="lines-container">
+            <div class="line-wrapper">
+                <div class="line-label"><img src="apache_logo.png" width="50" height="70"> 36ms</div>
+                <div class="line-container">
+                    <div class="line line1" id="line1"></div>
+                </div>
+            </div>
+            
+            <div class="line-wrapper">
+                <div class="line-label"><img src="frankenphp.png" width="100">25ms</div>
+                <div class="line-container">
+                    <div class="line line4" id="line4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function drawLines() {
+            const lines = [
+                { id: 'line1', timeId: 'time1', duration: 36 },
+                { id: 'line4', timeId: 'time4', duration: 25 }
+            ];
+            
+            lines.forEach(line => {
+                document.getElementById(line.id).style.width = '0%';
+                animateLine(line);
+            });
+        }
+        
+        function animateLine(line) {
+            const lineElement = document.getElementById(line.id);
+            
+            let progress = 0;
+            const frameRate = 16;
+            const totalFrames = Math.ceil(line.duration / frameRate);
+            
+            function animate() {
+                progress++;
+                const percentage = (progress / totalFrames) * 100;
+                
+                if (percentage <= 100) {
+                    lineElement.style.width = percentage + '%';
+                    
+                    if (percentage < 100) {
+                        setTimeout(animate, frameRate);
+                    }
+                }
+            }
+            
+            animate();
+        }
+        
+        function clearLines() {
+            const lines = ['line1', 'line4'];
+            lines.forEach(lineId => {
+                document.getElementById(lineId).style.width = '0%';
+            });
+        }
+    </script>
+</body>
+</html>
